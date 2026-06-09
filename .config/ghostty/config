@@ -1,0 +1,27 @@
+
+background = #16181d
+foreground = #c5cad4
+selection-foreground = #c5cad4
+selection-background = #2a2e38
+
+palette = 0=#1a1b22
+palette = 1=#b57a7a
+palette = 2=#95b898
+palette = 3=#b8a06d
+palette = 4=#7a9cc6
+palette = 5=#9a8bb3
+palette = 6=#7f9ea8
+palette = 7=#c5cad4
+palette = 8=#606672
+palette = 9=#c48b8b
+palette = 10=#a1c4a3
+palette = 11=#c5b17e
+palette = 12=#89abd6
+palette = 13=#a999c4
+palette = 14=#8caeb8
+palette = 15=#d4d8e0
+
+font-family = JetBrainsMono Nerd Font
+font-size = 14
+cursor-style = block
+cursor-style-blink = false

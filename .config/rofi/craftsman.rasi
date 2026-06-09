@@ -1,0 +1,114 @@
+* {
+    font: "JetBrainsMono Nerd Font 13";
+    background: #1c1f26;
+    background-color: #1c1f26;
+    foreground: #c5cad4;
+    border-color: #3d4250;
+    spacing: 2;
+
+    normal-foreground: #c5cad4;
+    normal-background: #1c1f26;
+    selected-normal-foreground: #c5cad4;
+    selected-normal-background: #2a2e38;
+    urgent-foreground: #b57a7a;
+    urgent-background: #1c1f26;
+    active-foreground: #89abd6;
+    active-background: #1c1f26;
+    alternate-normal-foreground: #c5cad4;
+    alternate-normal-background: #1a1b22;
+}
+
+window {
+    location: north;
+    anchor: north;
+    y-offset: 48;
+    width: 40%;
+    border: 1;
+    border-radius: 10;
+    padding: 8;
+    background-color: #1c1f26;
+    border-color: #3d4250;
+}
+
+inputbar {
+    padding: 10;
+    spacing: 8;
+    children: [ prompt, entry, case-indicator ];
+}
+
+prompt {
+    text-color: #a1c4a3;
+}
+
+entry {
+    placeholder: "Search";
+    placeholder-color: #606672;
+    text-color: #c5cad4;
+}
+
+case-indicator {
+    text-color: #606672;
+}
+
+listview {
+    lines: 10;
+    columns: 1;
+    padding: 0;
+    spacing: 2;
+}
+
+element {
+    padding: 8px 10px;
+    border-radius: 6;
+    cursor: pointer;
+    spacing: 5px;
+}
+
+element normal.normal {
+    background-color: var(normal-background);
+    text-color: var(normal-foreground);
+}
+
+element normal.urgent {
+    background-color: var(urgent-background);
+    text-color: var(urgent-foreground);
+}
+
+element normal.active {
+    background-color: var(active-background);
+    text-color: var(active-foreground);
+}
+
+element selected.normal {
+    background-color: var(selected-normal-background);
+    text-color: var(selected-normal-foreground);
+}
+
+element selected.urgent {
+    background-color: var(urgent-background);
+    text-color: var(urgent-foreground);
+}
+
+element selected.active {
+    background-color: var(active-background);
+    text-color: var(active-foreground);
+}
+
+element alternate.normal {
+    background-color: var(alternate-normal-background);
+    text-color: var(alternate-normal-foreground);
+}
+
+element-icon {
+    size: 20;
+    padding: 0 10 0 0;
+}
+
+element-text {
+    highlight: #a1c4a3;
+}
+
+scrollbar {
+    handle-width: 6;
+    handle-color: #3d4250;
+}

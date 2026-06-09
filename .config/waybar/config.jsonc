@@ -1,0 +1,45 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 30,
+  "margin-top": 8,
+  "modules-left": ["sway/workspaces", 
+          "sway/window",
+],
+
+  "modules-center": ["clock"],
+
+  "modules-right": ["cpu", "memory", "temperature","network"],
+
+"sway/workspaces": {
+    "disable-scroll": true,
+    "all-outputs": true,
+    "format": "{name}"
+},
+"sway/window": {
+    "max-length": 60,
+    "rewrite": {
+        "foot": "Terminal",
+        "firefox": "Firefox"
+    }
+},
+  "clock": {
+    "format": "󰥔 {:%a %d %b  %H:%M}",
+      "tooltip-format": "<tt>{calendar}</tt>"
+  },
+
+  "cpu":{
+    "format": "󰻠 {usage}%"
+  },
+  "temperature": {
+    "critical-threshold": 80,
+    "format": " {temperatureC}°C"
+},
+  "memory": {
+    "format": "  {}%"
+},
+  "network": {
+    "format-ethernet": "󰈀 {ipaddr}",
+    "format-disconnected": "󰤭 offline",
+  },
+}
