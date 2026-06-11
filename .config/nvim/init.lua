@@ -216,31 +216,6 @@ end
 
 vim.diagnostic.config({ float = { border = "rounded" } })
 
-vim.api.nvim_create_autocmd("LspAttach", {
-	group = vim.api.nvim_create_augroup("UserLSPConfig", {}),
-	callback = function(ev)
-		local opts = { buffer = ev.buf, silent = true }
-		local keymap = vim.keymap
-
-		vim.keymap.set("n", "grd", vim.diagnostic.open_float, { desc = "Open diagnostic float" })
-
-		opts.desc = "Add Diagnostic to local list"
-		keymap.set("n", "gql", vim.diagnostic.setqflist, opts)
-
-		vim.keymap.set("n", "]d", function()
-			vim.diagnostic.goto_next()
-			vim.diagnostic.open_float()
-		end, { desc = "Next diagnostic with float" })
-		vim.keymap.set("n", "[d", function()
-			vim.diagnostic.goto_prev()
-			vim.diagnostic.open_float()
-		end, { desc = "Prev diagnostic with float" })
-	end,
-})
-
-local ms = require("mason")
-ms.setup()
-
 local fzf = require("fzf-lua")
 
 fzf.setup({
@@ -269,23 +244,50 @@ end, { silent = true, desc = "Fuzzy complete path" })
 vim.keymap.set("n", "<C-p>", function()
 	FzfLua.files()
 end, { silent = true, desc = "Fuzzy complete path" })
+vim.api.nvim_create_autocmd("LspAttach", {
+	group = vim.api.nvim_create_augroup("UserLSPConfig", {}),
+	callback = function(ev)
+		local opts = { buffer = ev.buf, silent = true }
+		local keymap = vim.keymap
 
-vim.keymap.set("n", "g/", function()
-	FzfLua.live_grep_native()
-end, { silent = true, desc = "Fuzzy complete path" })
+		vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "go to definition" })
+		vim.keymap.set("n", "gi", vim.lsp.buf.type_definition, { desc = "go to type definition" })
 
-vim.keymap.set("n", "gS", function()
-	FzfLua.lsp_live_workspace_symbols()
-end, { silent = true, desc = "Fuzzy complete path" })
+		vim.keymap.set("n", "grd", vim.diagnostic.open_float, { desc = "Open diagnostic float" })
 
-vim.keymap.set("n", "grr", function()
-	FzfLua.lsp_references()
-end, { silent = true, desc = "Fuzzy complete path" })
+		opts.desc = "Add Diagnostic to local list"
+		keymap.set("n", "gql", vim.diagnostic.setqflist, opts)
 
-vim.keymap.set("n", "gra", function()
-	FzfLua.lsp_code_actions()
-end, { silent = true, desc = "Fuzzy complete path" })
+		vim.keymap.set("n", "g/", function()
+			FzfLua.live_grep_native()
+		end, { silent = true, desc = "Fuzzy complete path" })
 
-vim.keymap.set("n", "gO", function()
-	FzfLua.lsp_document_symbols()
-end, { silent = true, desc = "Fuzzy complete path" })
+		vim.keymap.set("n", "gS", function()
+			FzfLua.lsp_live_workspace_symbols()
+		end, { silent = true, desc = "Fuzzy complete path" })
+
+		vim.keymap.set("n", "grr", function()
+			FzfLua.lsp_references()
+		end, { silent = true, desc = "Fuzzy complete path" })
+
+		vim.keymap.set("n", "gra", function()
+			FzfLua.lsp_code_actions()
+		end, { silent = true, desc = "Fuzzy complete path" })
+
+		vim.keymap.set("n", "gO", function()
+			FzfLua.lsp_document_symbols()
+		end, { silent = true, desc = "Fuzzy complete path" })
+
+		vim.keymap.set("n", "]d", function()
+			vim.diagnostic.goto_next()
+			vim.diagnostic.open_float()
+		end, { desc = "Next diagnostic with float" })
+		vim.keymap.set("n", "[d", function()
+			vim.diagnostic.goto_prev()
+			vim.diagnostic.open_float()
+		end, { desc = "Prev diagnostic with float" })
+	end,
+})
+
+local ms = require("mason")
+ms.setup()
