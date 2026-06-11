@@ -134,43 +134,6 @@ conform.setup({
 	},
 })
 
-local blink = require("blink.cmp")
-blink.setup({
-	completion = {
-		trigger = {
-			show_on_insert = true,
-			show_on_keyword = true,
-			show_on_trigger_character = true,
-			show_on_backspace = true,
-			show_on_backspace_in_keyword = true,
-			show_on_backspace_after_accept = true,
-			show_on_backspace_after_insert_enter = true,
-			show_on_accept_on_trigger_character = true,
-			show_on_insert_on_trigger_character = true,
-		},
-		menu = {
-			border = "rounded",
-			winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder",
-		},
-		documentation = {
-			window = { border = "rounded" },
-		},
-	},
-	sources = {
-		default = { "lsp", "buffer" },
-	},
-	keymap = {
-		preset = "enter",
-		["<C-Space>"] = { "show", "hide" },
-		["<C-n>"] = { "select_next" },
-		["<C-p>"] = { "select_prev" },
-		["<C-y>"] = { "select_and_accept" },
-		["<C-e>"] = { "hide" },
-		["<C-b>"] = { "scroll_documentation_up" },
-		["<C-f>"] = { "scroll_documentation_down" },
-	},
-})
-
 vim.lsp.config("*", {
 	root_markers = { ".git" },
 })
@@ -216,37 +179,46 @@ end
 
 vim.diagnostic.config({ float = { border = "rounded" } })
 
-local fzf = require("fzf-lua")
-
-fzf.setup({
-	winopts = {
-		height = 0.80,
-		width = 0.70,
-		row = 0.35,
-		col = 0.50,
-		border = "rounded",
-		preview = {
-			layout = "horizontal",
-			horizontal = "down:60%",
-		},
-	},
-	hls = { border = "FloatBorder" },
-})
-
-require("fzf-lua").register_ui_select({
-	silent = true,
-})
-
-vim.keymap.set({ "n", "v", "i" }, "<C-x><C-f>", function()
-	FzfLua.complete_path()
-end, { silent = true, desc = "Fuzzy complete path" })
-
-vim.keymap.set("n", "<C-p>", function()
-	FzfLua.files()
-end, { silent = true, desc = "Fuzzy complete path" })
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("UserLSPConfig", {}),
 	callback = function(ev)
+		local blink = require("blink.cmp")
+		blink.setup({
+			completion = {
+				trigger = {
+					show_on_insert = true,
+					show_on_keyword = true,
+					show_on_trigger_character = true,
+					show_on_backspace = true,
+					show_on_backspace_in_keyword = true,
+					show_on_backspace_after_accept = true,
+					show_on_backspace_after_insert_enter = true,
+					show_on_accept_on_trigger_character = true,
+					show_on_insert_on_trigger_character = true,
+				},
+				menu = {
+					border = "rounded",
+					winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder",
+				},
+				documentation = {
+					window = { border = "rounded" },
+				},
+			},
+			sources = {
+				default = { "lsp", "buffer" },
+			},
+			keymap = {
+				preset = "enter",
+				["<C-Space>"] = { "show", "hide" },
+				["<C-n>"] = { "select_next" },
+				["<C-p>"] = { "select_prev" },
+				["<C-y>"] = { "select_and_accept" },
+				["<C-e>"] = { "hide" },
+				["<C-b>"] = { "scroll_documentation_up" },
+				["<C-f>"] = { "scroll_documentation_down" },
+			},
+		})
+
 		local opts = { buffer = ev.buf, silent = true }
 		local keymap = vim.keymap
 
@@ -257,6 +229,35 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 		opts.desc = "Add Diagnostic to local list"
 		keymap.set("n", "gql", vim.diagnostic.setqflist, opts)
+
+		local fzf = require("fzf-lua")
+
+		fzf.setup({
+			winopts = {
+				height = 0.80,
+				width = 0.70,
+				row = 0.35,
+				col = 0.50,
+				border = "rounded",
+				preview = {
+					layout = "horizontal",
+					horizontal = "down:60%",
+				},
+			},
+			hls = { border = "FloatBorder" },
+		})
+
+		require("fzf-lua").register_ui_select({
+			silent = true,
+		})
+
+		vim.keymap.set({ "n", "v", "i" }, "<C-x><C-f>", function()
+			FzfLua.complete_path()
+		end, { silent = true, desc = "Fuzzy complete path" })
+
+		vim.keymap.set("n", "<C-p>", function()
+			FzfLua.files()
+		end, { silent = true, desc = "Fuzzy complete path" })
 
 		vim.keymap.set("n", "g/", function()
 			FzfLua.live_grep_native()
