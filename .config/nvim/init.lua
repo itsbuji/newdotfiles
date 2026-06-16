@@ -97,9 +97,9 @@ vim.pack.add({
 	{
 		src = "https://github.com/ibhagwan/fzf-lua",
 	},
-	{
-		src = "https://github.com/nvim-treesitter/nvim-treesitter",
-	},
+	-- {
+	-- 	src = "https://github.com/nvim-treesitter/nvim-treesitter",
+	-- },
 	{ src = "https://github.com/stevearc/conform.nvim" },
 	{
 		src = "https://github.com/kylechui/nvim-surround",
@@ -110,13 +110,40 @@ vim.pack.add({
 	{ src = "https://github.com/Saghen/blink.lib" },
 	{ src = "https://github.com/rebelot/kanagawa.nvim" },
 	{ src = "https://github.com/neanias/everforest-nvim" },
+	{ src = "https://github.com/oskarnurm/koda.nvim" },
 })
 
-require("kanagawa").setup({
-	transparent = true,
-})
+vim.cmd.colorscheme("default")
 
-vim.cmd.colorscheme("kanagawa-wave")
+vim.api.nvim_set_hl(0, "Normal", { bg = "NONE" })
+vim.api.nvim_set_hl(0, "NormalNC", { bg = "NONE" })
+vim.api.nvim_set_hl(0, "SignColumn", { bg = "NONE" })
+
+-- vim.api.nvim_set_hl(0, "@comment", {
+-- 	fg = "#5f5f5f",
+-- 	italic = false,
+-- 	bg = "NONE",
+-- })
+
+-- vim.api.nvim_set_hl(0, "Type", { fg = "#8f9bb3" })
+-- vim.api.nvim_set_hl(0, "Function", { fg = "#c8d0e0" })
+-- vim.api.nvim_set_hl(0, "Statement", { fg = "#a0a8b8" })
+-- vim.api.nvim_set_hl(0, "Comment", { fg = "#6a7280", italic = true })
+-- vim.api.nvim_set_hl(0, "PreProc", { fg = "#b8a070" })
+
+-- vim.api.nvim_set_hl(0, "Type", { fg = "#c0a080" })
+-- vim.api.nvim_set_hl(0, "Function", { fg = "#d0c0a0" })
+-- vim.api.nvim_set_hl(0, "Statement", { fg = "#b8a890" })
+-- vim.api.nvim_set_hl(0, "Comment", { fg = "#70685f", italic = true })
+-- vim.api.nvim_set_hl(0, "PreProc", { fg = "#d0b070" })
+
+vim.api.nvim_set_hl(0, "Type", { fg = "#7f9db9" })
+vim.api.nvim_set_hl(0, "Function", { fg = "#b7c9d6" })
+vim.api.nvim_set_hl(0, "Statement", { fg = "#95a5b3" })
+vim.api.nvim_set_hl(0, "Comment", { fg = "#66707a", italic = true })
+vim.api.nvim_set_hl(0, "PreProc", { fg = "#b39d6b" })
+
+vim.opt.signcolumn = "no"
 
 local conform = require("conform")
 
