@@ -108,7 +108,15 @@ vim.pack.add({
 	{ src = "https://github.com/mason-org/mason.nvim", name = "Mason" },
 	{ src = "https://github.com/Saghen/blink.cmp" },
 	{ src = "https://github.com/Saghen/blink.lib" },
+	{ src = "https://github.com/rebelot/kanagawa.nvim" },
+	{ src = "https://github.com/neanias/everforest-nvim" },
 })
+
+require("kanagawa").setup({
+	transparent = true,
+})
+
+vim.cmd.colorscheme("kanagawa-wave")
 
 local conform = require("conform")
 
